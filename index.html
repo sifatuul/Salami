@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ঈদ সালামি 😎</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Anek Bangla', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: white;
+    text-align: center;
+}
+
+.card {
+    margin: 25px auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 420px;
+    background: linear-gradient(135deg, #ec4899, #f43f5e);
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+.pay {
+    background: #111827;
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.sub {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+/* Name */
+.name-box {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #374151;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    margin: 6px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 12px;
+    background: #22c55e;
+    color: white;
+    cursor: pointer;
+}
+
+.amounts button {
+    background: #1e293b;
+}
+
+.pay div {
+    margin: 15px 0;
+    padding: 15px;
+    background: #1f2937;
+    border-radius: 14px;
+}
+
+.copy {
+    background: #3b82f6;
+}
+
+.qr img {
+    width: 120px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* 🔊 Floating button */
+.mute-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #eab308;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.footer {
+    margin: 20px;
+    font-size: 13px;
+    opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="bgMusic" loop autoplay muted playsinline>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🔊 MUTE BUTTON -->
+<button class="mute-btn" onclick="toggleMute()" id="muteBtn">🔇</button>
+
+<!-- CARD -->
+<div class="card">
+    <h1>🌙 ঈদ মোবারক!</h1>
+    <div class="sub">
+        সালামি না দিলে কষ্ট পাবো 😭<br>
+        বেশি দিলে lifetime priority 😌🔥
+    </div>
+
+    <div style="font-size:13px; opacity:0.7;">
+        👉 স্ক্রল বা ট্যাপ করুন 🎵
+    </div>
+
+    <h3>💸 সালামি সিলেক্ট করুন</h3>
+
+    <div class="amounts">
+        <button class="btn" onclick="copyText('50')">৫০৳</button>
+        <button class="btn" onclick="copyText('100')">১০০৳</button>
+        <button class="btn" onclick="copyText('500')">৫০০৳</button>
+        <button class="btn" onclick="copyText('1000')">১০০০৳</button>
+        <button class="btn" onclick="copyText('5000')">৫০০০৳ 😎</button>
+    </div>
+</div>
+
+<!-- PAYMENT -->
+<div class="card pay">
+
+    <div class="name-box">
+        👤 প্রাপক: MD Sifatul Islam
+    </div>
+
+    <h3>📱 সালামি পাঠান</h3>
+
+    <div>
+        🟣 bKash <br>
+        <span id="bkash">01914510064</span><br>
+        <button class="btn copy" onclick="copyID('bkash')">Copy</button>
+        <div class="qr">
+            <img src="YOUR_BKASH_QR_IMAGE_LINK.png">
+        </div>
+    </div>
+
+    <div>
+        🚀 Rocket and NexusPay <br>
+        <span id="rocket">01332381889</span><br>
+        <button class="btn copy" onclick="copyID('rocket')">Copy</button>
+        <div class="qr">
+            <img src="YOUR_ROCKET_QR_IMAGE_LINK.png">
+        </div>
+    </div>
+
+    <div>
+        🟠 Nagad <br>
+        <span id="nagad">01816409593</span><br>
+        <button class="btn copy" onclick="copyID('nagad')">Copy</button>
+    </div>
+
+    <div>
+        🔵 Sonali Ewallet <br>
+        <span id="sonali">01914510064</span><br>
+        <button class="btn copy" onclick="copyID('sonali')">Copy</button>
+    </div>
+
+    <div>
+        🟢 Upay <br>
+        <span id="upay">01816409593</span><br>
+        <button class="btn copy" onclick="copyID('upay')">Copy</button>
+    </div>
+
+    <div>
+        💳 Bank <br>
+        <span id="bank">7017343236131 (DBBL) || 4404001001227 (Sonali)</span><br>
+        <button class="btn copy" onclick="copyID('bank')">Copy</button>
+    </div>
+
+</div>
+
+<div class="footer">
+😏 টাকা পাঠাও... না পাঠালে মনে রাখবো 👀
+</div>
+
+<script>
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("muteBtn");
+
+/* Start music (muted autoplay) */
+window.addEventListener("load", () => {
+    music.volume = 0.7;
+    music.play().catch(()=>{});
+});
+
+/* First interaction → enable sound */
+function enableSound() {
+    music.muted = false;
+    music.play().catch(()=>{});
+    btn.innerHTML = "🔊";
+}
+
+document.addEventListener("click", enableSound, { once: true });
+document.addEventListener("touchstart", enableSound, { once: true });
+window.addEventListener("scroll", enableSound, { once: true });
+
+/* Mute toggle */
+function toggleMute() {
+    music.muted = !music.muted;
+    btn.innerHTML = music.muted ? "🔇" : "🔊";
+}
+
+/* Copy functions */
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+    alert(text + "৳ copied 😎");
+}
+
+function copyID(id) {
+    let text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+    alert("Copied: " + text);
+}
+</script>
+
+</body>
+</html>
